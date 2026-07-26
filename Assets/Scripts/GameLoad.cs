@@ -14,6 +14,7 @@ public class GameLoad : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             playerState.ResetHealth();
             playerState.ResetHalos();
+            playerState.ResetLostSouls();
             gameState.InitGameState();
         }
     }

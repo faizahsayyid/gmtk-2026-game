@@ -6,6 +6,8 @@ public class StartGame : MonoBehaviour
 {
 
     public Button startButton;
+    public PlayerState playerState;
+    public GameState gameState;
 
     void Start()
     {
@@ -14,6 +16,10 @@ public class StartGame : MonoBehaviour
 
     void OnStartGame()
     {
+        playerState.ResetHealth();
+        playerState.ResetHalos();
+        playerState.ResetLostSouls();
+        gameState.InitGameState();
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
 }

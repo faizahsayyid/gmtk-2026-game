@@ -8,6 +8,7 @@ public class SoulController : MonoBehaviour
      public float ascensionDelay = 1.5f;
     
     public float speed = 3f;
+    public PlayerState playerState;
 
     private Collider2D soulCollider;
     private bool isAscending;
@@ -27,8 +28,22 @@ public class SoulController : MonoBehaviour
 
         transform.Translate(Vector3.down * speed * Time.deltaTime);
 
-        if (transform.position.x < -15f)
+        float offScreenY = -15f;
+        if (Camera.main != null)
+        {
+            Vector3 bottomViewport = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, Mathf.Abs(Camera.main.transform.position.z)));
+            offScreenY = bottomViewport.y - 1f;
+        }
+
+        if (transform.position.y < offScreenY)
+        {
+            if (playerState != null)
+            {
+                playerState.RegisterLostSoul();
+            }
+
             Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

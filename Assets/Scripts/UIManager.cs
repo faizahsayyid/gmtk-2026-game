@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
  public TextMeshProUGUI healthText;
     public TextMeshProUGUI halosText;
     public TextMeshProUGUI wavesText;
+    public TextMeshProUGUI stageText;
+    public TextMeshProUGUI lostSoulsText;
 
     public PlayerState playerState;
     public GameState gameState;
@@ -26,15 +28,37 @@ public class UIManager : MonoBehaviour
 
     void HandleUI()
     {
-        healthText.text = "Lives: " + playerState.GetHealth().ToString();
-        halosText.text = "Halos: " + playerState.GetHalos().ToString();
-        int numWaves = gameState.GetWaves();
-        if (numWaves > 0)
+        if (healthText != null)
         {
-            wavesText.text =  numWaves.ToString();
-        } else
+            healthText.text = "Lives: " + playerState.GetHealth().ToString();
+        }
+
+        if (halosText != null)
         {
-            wavesText.text = "";
+            halosText.text = "Halos: " + playerState.GetHalos().ToString();
+        }
+
+        if (wavesText != null)
+        {
+            int numWaves = gameState.GetWaves();
+            if (numWaves > 0)
+            {
+                wavesText.text =  numWaves.ToString();
+            }
+            else
+            {
+                wavesText.text = "";
+            }
+        }
+
+        if (stageText != null)
+        {
+            stageText.text = "Stage: " + gameState.GetStage().ToString();
+        }
+
+        if (lostSoulsText != null)
+        {
+            lostSoulsText.text = "Lost Souls: " + playerState.GetLostSouls().ToString();
         }
     }
 }

@@ -7,6 +7,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public PlayerState playerState;
+    public GameState gameState;
     public Image blackScreenImage;
 
     public float blackScreenDelay = 1f;
@@ -31,7 +32,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         yield return new WaitForSeconds(blackScreenDelay);
         playerState.ResetHealth();
         playerState.ResetHalos();
+        playerState.ResetLostSouls();
         SceneManager.LoadScene("Home", LoadSceneMode.Single);
-        blackScreenImage.color = new Color(0, 0, 0, 0);
     }
 }
