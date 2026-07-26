@@ -9,6 +9,8 @@ public class SoulSpawner : MonoBehaviour
     public float baseSpeed = 3f;
     public float speedIncreasePerWave = 1f;
     public float spawnInterval = 0.15f;
+    [Range(0f, 1f)] public float badSoulSpawnChance = 0.15f;
+    public int badSoulStartWave = 2;
     public GameState gameState;
 
     void OnEnable()
@@ -35,18 +37,30 @@ public class SoulSpawner : MonoBehaviour
         for (int i = 0; i < spawnNumber; i++)
         {
             float delay = i * spawnInterval;
-            StartCoroutine(SpawnSoulWithDelay(delay, speed));
+            bool shouldSpawnBadSoul = ShouldSpawnBadSoul(wave);
+            StartCoroutine(SpawnSoulWithDelay(delay, speed, shouldSpawnBadSoul));
         }
     }
 
-    private System.Collections.IEnumerator SpawnSoulWithDelay(float delay, float speed)
+    private bool ShouldSpawnBadSoul(int wave)
+    {
+        if (wave < badSoulStartWave || gameState == null || gameState.GetStage() <= 1)
+        {
+            return false;
+        }
+
+        return Random.value <= badSoulSpawnChance;
+    }
+
+    private System.Collections.IEnumerator SpawnSoulWithDelay(float delay, float speed, bool spawnBadSoul)
     {
         yield return new WaitForSeconds(delay);
 
         Vector3 pos = transform.position;
         pos.x = Random.Range(minX, maxX);
 
-        GameObject spawnedSoul = Instantiate(soul, pos, Quaternion.identity);
+        GameObject prefabToSpawn = spawnBadSoul && badSoul != null ? badSoul : soul;
+        GameObject spawnedSoul = Instantiate(prefabToSpawn, pos, Quaternion.identity);
         SoulController soulController = spawnedSoul.GetComponent<SoulController>();
         if (soulController != null)
         {

@@ -46,6 +46,11 @@ public class GameState : ScriptableObject
         return isCoolDown;
     }
 
+    public int GetStage()
+    {
+        return stage;
+    }
+
     public void ResetTimer()
     {
         timeRemaining = isCoolDown ? coolDownDuration : waveDuration;

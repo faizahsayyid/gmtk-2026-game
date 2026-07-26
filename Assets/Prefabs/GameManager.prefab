@@ -90,11 +90,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoulSpawner
   soul: {fileID: 710346167567676469, guid: 818a6b975937740eca3b9da752e8cb86, type: 3}
+  badSoul: {fileID: 2898203275748164589, guid: 8efa2b56e7a54489aa2ec0cff86f7bdd, type: 3}
   minX: -6
   maxX: 6
   baseSpeed: 0.5
   speedIncreasePerWave: 0.5
   spawnInterval: 0.5
+  badSoulSpawnChance: 0.15
+  badSoulStartWave: 2
   gameState: {fileID: 11400000, guid: 19e927f8bd8ba4164a3cec8bde0cdce0, type: 2}
 --- !u!1 &7593327593950569562
 GameObject:

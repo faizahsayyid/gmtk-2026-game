@@ -7,6 +7,7 @@ TagManager:
   - Soul
   - Halo
   - HaloCollectable
+  - BadSoul
   layers:
   - Default
   - TransparentFX
